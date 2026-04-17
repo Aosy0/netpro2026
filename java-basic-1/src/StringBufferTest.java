@@ -14,7 +14,7 @@ public class StringBufferTest {
     for (int i = 0; i < n; i++) {
       sentence += word;
     }
-    System.out.println(sentence);
+    // System.out.println(sentence);
     System.out.println("+の文字連結処理にかかった時間：" + (System.currentTimeMillis() - start) + "ms");
 
     /*------------------------------
@@ -26,7 +26,7 @@ public class StringBufferTest {
       sb.append(word);
     }
     sentence = new String(sb);
-    System.out.println(sentence);
+    // System.out.println(sentence);
     System.out.println("StringBufferの文字連結処理にかかった時間：" + (System.currentTimeMillis() - start) + "ms");
 
     /*------------------------------
@@ -40,18 +40,22 @@ public class StringBufferTest {
     }
     start = System.currentTimeMillis();
     sentence = String.join("", words); // joinメソッドの第一引数に区切り文字を入れるとその文字で区切ってくれます。(StringOperationTestにもサンプル有)
-    System.out.println(sentence);
+    // System.out.println(sentence);
     System.out.println("String.joinの文字連結処理にかかった時間：" + (System.currentTimeMillis() - start) + "ms");
     /*------------------------------
     Java8からの機能
     StringJoinerによる文字連結の処理
     ------------------------------*/
     start = System.currentTimeMillis();
+    long start_nt = System.nanoTime();
     StringJoiner joiner = new StringJoiner("");// 引数に区切り文字を入れるとその文字で区切ってくれます。第二第三引数で最初の文字と最後の文字を入れることもできます。(StringOperationTestにもサンプル有)
     for (int i = 0; i < n; i++) {
       joiner.add(word);// 連結する文字を指定します。
     }
-    System.out.println(joiner.toString());
+    // System.out.println(joiner.toString());
+    long end_nt = System.nanoTime();
+    long total_nt = end_nt - start_nt;
+    System.out.println("StringJoinerの文字連結処理にかかった時間：" + total_nt + "ns");
     System.out.println("StringJoinerの文字連結処理にかかった時間：" + (System.currentTimeMillis() - start) + "ms");
 
   }
