@@ -6,6 +6,40 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Calc2ScannerFile",
+      "request": "launch",
+      "mainClass": "Calc2ScannerFile",
+      "projectName": "java-basic-1_85decadd"
+    },
+    {
+      "type": "java",
+      "name": "Calc2Scanner",
+      "request": "launch",
+      "mainClass": "Calc2Scanner",
+      "projectName": "java-basic-1_85decadd"
+    },
+    {
+      "type": "java",
+      "name": "Calc2",
+      "request": "launch",
+      "mainClass": "Calc2",
+      "projectName": "java-basic-1_85decadd"
+    },
+    {
+      "type": "java",
+      "name": "Calc1",
+      "request": "launch",
+      "mainClass": "Calc1",
+      "projectName": "java-basic-1_85decadd",
+      "args": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ]
+    },
+    {
+      "type": "java",
       "name": "IfArgs",
       "request": "launch",
       "mainClass": "IfArgs",
