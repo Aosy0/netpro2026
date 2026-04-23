@@ -6,6 +6,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "TheBoilingEarthEraC",
+      "request": "launch",
+      "mainClass": "TheBoilingEarthEraC",
+      "projectName": "java-basic-1_93f4e1e7"
+    },
+    {
+      "type": "java",
+      "name": "TheBoilingEarthEraB",
+      "request": "launch",
+      "mainClass": "TheBoilingEarthEraB",
+      "projectName": "java-basic-1_93f4e1e7"
+    },
+    {
+      "type": "java",
       "name": "TheBoilingEarthEraA",
       "request": "launch",
       "mainClass": "TheBoilingEarthEraA",
