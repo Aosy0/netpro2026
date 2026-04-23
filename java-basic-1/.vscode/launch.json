@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "TheBoilingEarthEraA",
+      "request": "launch",
+      "mainClass": "TheBoilingEarthEraA",
+      "projectName": "java-basic-1_93f4e1e7"
+    },
+    {
+      "type": "java",
       "name": "PrintYourAge",
       "request": "launch",
       "mainClass": "PrintYourAge",
