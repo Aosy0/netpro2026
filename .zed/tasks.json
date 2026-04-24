@@ -1,0 +1,16 @@
+[
+  {
+    "label": "Java: Compile & Run (hello)",
+    "command": "javac -encoding UTF-8 -d hello/out hello/src/$ZED_STEM.java; if ($?) { java -cp hello/out $ZED_STEM }",
+    "shell": "system",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "reveal": "always",
+  },
+  {
+    "label": "Java: Compile & Run (java-basic-1)",
+    "command": "javac -encoding UTF-8 -d java-basic-1/out java-basic-1/src/$ZED_STEM.java; if ($?) { java -cp java-basic-1/out $ZED_STEM }",
+    "shell": "system",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "reveal": "always",
+  },
+]
