@@ -1,5 +1,6 @@
-public class CarImpl implements IDrivable {
-  public int speed; // privateでは動かなかった。おそらくパッケージを利用していないため。
+public class CarImpl implements IDrivable, IElectric {
+  private int speed; // privateでは動かなかった。おそらくパッケージを利用していないため。
+  private int power;
 
   @Override
   public void drive(int speed) {
@@ -21,6 +22,21 @@ public class CarImpl implements IDrivable {
   public int speedDown(int speed) {
     this.speed = speed;
     return this.speed;
+  }
+
+  @Override
+  public boolean chargeElectricePower(int power) {
+    if (power > 0) {
+      this.power += power;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @Override
+  public int getElectricePower() {
+    return this.power;
   }
 
 }
