@@ -53,7 +53,7 @@ public class XmasTree {
             }
           }
           System.out.println("");
-          System.out.println("");
+          // System.out.println("");
         }
 
         System.out.println("");
