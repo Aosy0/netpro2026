@@ -8,22 +8,19 @@ public class CarImpl implements IDrivable {
   }
 
   @Override
+  public void stop(int i) {
+    this.speed = 0;
+  }
+
+  @Override
   public int speedUp(int speed) {
-    this.speed = speed;
-    throw new UnsupportedOperationException("Unimplemented method 'speedUp'");
+    return this.speed;
   }
 
   @Override
   public int speedDown(int speed) {
-    // TODO Auto-generated method stub
     this.speed = speed;
     return this.speed;
-    // throw new UnsupportedOperationException("Unimplemented method 'speedDown'");
   }
 
-  @Override
-  public int stop(int i) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'stop'");
-  }
 }
