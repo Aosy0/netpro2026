@@ -25,10 +25,10 @@ public class XmasTree {
         trunkLength = Integer.parseInt(input[2]);
         snow = input[3];
 
-        int i = 0;
+        // int i = 0;
         int snowCount = 0;
         // 上の部分
-        for (i = 0; i < leaf; i++) {
+        for (int i = 0; i <= leaf; i++) {
           // 左側の雪
           for (snowCount = i; snowCount < leaf; snowCount++) {
             if (snowCount % 3 == 0) {
@@ -54,6 +54,18 @@ public class XmasTree {
           }
           System.out.println("");
           // System.out.println("");
+        }
+
+        // 下の部分
+        int space = (2 * leaf - trunkWidth) / 2 + 1; // 雪と余白の関係で少しオフセット
+        for (int j = 0; j < trunkLength; j++) {
+          for (int k = 0; k < space; k++) {
+            System.out.print(" ");
+          }
+          for (int l = 0; l < trunkWidth; l++) {
+            System.out.print("*");
+          }
+          System.out.println("");
         }
 
         System.out.println("");
