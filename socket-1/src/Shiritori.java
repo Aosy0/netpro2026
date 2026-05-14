@@ -2,23 +2,23 @@ import java.io.Serializable;
 
 public class Shiritori implements Serializable {
 
-  public String message;
-  public String content;
+  public String word;
+  //public String content;
 
-  public String getMessage() {
-    return message;
+  public String getWord() {
+    return word;
   }
 
-  public void setMessage(String message) {
-    this.message = message;
+  public void setWord(String word) {
+    this.word = word;
   }
 
-  public String getContent() {
-    return content;
-  }
+  // public String getContent() {
+  //   return content;
+  // }
 
-  public void setContent(String present) {
-    this.content = present;
-  }
+  // public void setContent(String present) {
+  //   this.content = present;
+  // }
 
 }

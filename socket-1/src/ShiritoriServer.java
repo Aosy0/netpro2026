@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ShiritoriServer {
 
-  private static final int times = 2;
+  private static final int times = 5;
 
   private static String serverProcess(String content) {
     StringBuilder sb = new StringBuilder();
@@ -38,16 +38,17 @@ public class ShiritoriServer {
 
       Shiritori word = (Shiritori) ois.readObject();// Integerクラスでキャスト。
 
-      String msgPresent = word.getMessage();
-      System.out.println("メッセージは" + msgPresent);
-      String presentFromClient = word.getContent();
-      System.out.println("プレゼントの内容は" + presentFromClient);
+      String wordFromClient = word.getWord();
+      System.out.println("メッセージは" + wordFromClient);
+      //String wordFromClient = word.getContent();
+      //System.out.println("プレゼントの内容は" + wordFromClient);
+      String wordFromServer = "";
 
       ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
       Shiritori response = new Shiritori();
-      response.setMessage("サーバーです。メリークリスマス！\n" + presentFromClient + "ありがとう。\nプレゼントのお返しは" + times + "倍" + "です");
-      response.setContent(serverProcess(presentFromClient));
+      response.setWord("サーバーです。 " + wordFromClient + " ですね。では次の言葉は、 " + wordFromServer + "です。");
+      response.setWord(serverProcess(wordFromClient));
 
       oos.writeObject(response);
       oos.flush();

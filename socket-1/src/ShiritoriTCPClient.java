@@ -15,18 +15,18 @@ public class ShiritoriTCPClient {
       Socket socket = new Socket("localhost", port);
       System.out.println("接続されました");
 
-      System.out.println("プレゼントを送ります");
+      System.out.println("しりとりをします。");
       ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-      System.out.println("メッセージを入力してください(例:メリークリスマス) ↓");
+      System.out.println("ひらがなかアルファベットで単語を入力してください。");
       String message = scanner.next();
-      System.out.println("プレゼントの内容を入力してください(例:お菓子) ↓");
-      String content = scanner.next();
+      //System.out.println("プレゼントの内容を入力してください(例:お菓子) ↓");
+      //String content = scanner.next();
       scanner.close();
 
       Shiritori word = new Shiritori();
       word.setMessage(message);
-      word.setContent(content);
+      //word.setContent(content);
 
       oos.writeObject(word);
       oos.flush();
@@ -37,8 +37,8 @@ public class ShiritoriTCPClient {
 
       String replayMsg = okaeshiWord.getMessage();
       System.out.println("サーバからのメッセージは" + replayMsg);
-      String replayContent = okaeshiWord.getContent();
-      System.out.println(replayContent + "をもらいました！");
+      //String replayContent = okaeshiWord.getContent();
+      //System.out.println(replayContent + "をもらいました！");
 
       ois.close();
       oos.close();
