@@ -6,20 +6,6 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class ShiritoriServer {
-
-  private static final int times = 2;
-
-  private static String serverProcess(String content) {
-    StringBuilder sb = new StringBuilder();
-    sb.append("🎁");// sb.append("pz1");
-    for (int i = 0; i < times; i++) {
-      sb.append(content);
-    }
-    sb.append("🎁");// sb.append("pz2");
-    String result = sb.toString();
-    return result;
-  }
-
   public static void main(String arg[]) {
     try {
       /* 通信の準備をする */
