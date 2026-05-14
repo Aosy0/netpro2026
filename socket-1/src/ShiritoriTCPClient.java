@@ -20,6 +20,7 @@ public class ShiritoriTCPClient {
       ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
       System.out.println("ひらがなかアルファベットで単語を入力してください。");
+      System.out.println("濁点・半濁点は無視してOK");
       while (true) {
         String message = scanner.next();
         // System.out.println("プレゼントの内容を入力してください(例:お菓子) ↓");
@@ -38,6 +39,11 @@ public class ShiritoriTCPClient {
         Shiritori okaeshiWord = (Shiritori) ois.readObject();
         String replayMsg = okaeshiWord.getWord();
         System.out.println(replayMsg);
+
+        if (replayMsg.contains("負け")) {
+          System.out.println("しりとりを終了します。");
+          break;
+        }
       }
       scanner.close();
 

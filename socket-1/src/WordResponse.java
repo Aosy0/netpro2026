@@ -6,33 +6,6 @@ public class WordResponse {
   private Map<Character, String> words = new HashMap<>();
 
   public WordResponse() {
-    words.put('A', "Alpha");
-    words.put('B', "Bravo");
-    words.put('C', "Charlie");
-    words.put('D', "Delta");
-    words.put('E', "Echo");
-    words.put('F', "Foxtrot");
-    words.put('G', "Golf");
-    words.put('H', "Hotel");
-    words.put('I', "India");
-    words.put('J', "Juliett");
-    words.put('K', "Kilo");
-    words.put('L', "Lima");
-    words.put('M', "Mike");
-    words.put('N', "November");
-    words.put('O', "Oscar");
-    words.put('P', "Papa");
-    words.put('Q', "Quebec");
-    words.put('R', "Romeo");
-    words.put('S', "Sierra");
-    words.put('T', "Tango");
-    words.put('U', "Uniform");
-    words.put('V', "Victor");
-    words.put('W', "Whiskey");
-    words.put('X', "X-ray");
-    words.put('Y', "Yankee");
-    words.put('Z', "Zulu");
-
     words.put('あ', "あさひ");
     words.put('い', "いろは");
     words.put('う', "うえの");
@@ -90,20 +63,24 @@ public class WordResponse {
     words.put('を', "おわり");
   }
 
+  public char getFirstChar(String str) {
+    String normalized = Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+    return normalized.charAt(0);
+  }
+
+  public char getLastChar(String str) {
+    String normalized = Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+    return normalized.charAt(normalized.length() - 1);
+  }
+
   public String getWord(String str) {
     if (str == null || str.isEmpty()) {
       return "文字が入力されていません";
     }
 
-    String normalized = Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+    char c = getLastChar(str);
+    char searchChar = Character.toUpperCase(c);
 
-    char c = normalized.charAt(normalized.length() - 1);
-    if (c == 'ん') {
-      return "「ん」がついたのであなたの負けです。";
-    }
-    char searchChar = Character.toUpperCase(c); // 大文字にしておく
-
-    // getOrDefaultメソッドを使うと、Mapに登録されていない文字が入力されたときの返答を設定できる
-    return words.getOrDefault(searchChar, "該当なし");
+    return words.getOrDefault(searchChar, "error");
   }
 }

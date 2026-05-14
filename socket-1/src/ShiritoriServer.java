@@ -36,9 +36,10 @@ public class ShiritoriServer {
 
       ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
       ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+      WordResponse wordResponse = new WordResponse();
+      char lastCharFromServer = '\0';
 
       while (true) {
-        WordResponse WordResponse = new WordResponse();
         Shiritori word = (Shiritori) ois.readObject();// Integerクラスでキャスト。
 
         String wordFromClient = word.getWord();
@@ -50,12 +51,53 @@ public class ShiritoriServer {
         // String wordFromClient = word.getContent();
         // System.out.println("プレゼントの内容は" + wordFromClient);
 
-        String wordFromServer = WordResponse.getWord(wordFromClient);
-        System.out.println(wordFromServer);
+        // しりとりになってるかチェック
+        if (lastCharFromServer != '\0') { // 初回（'\0'）以外はチェックする
+          char clientFirstChar = wordResponse.getFirstChar(wordFromClient);
+          if (clientFirstChar != lastCharFromServer) {
+            Shiritori response = new Shiritori();
+            response.setWord("「" + lastCharFromServer + "」から始まる言葉にしてください！");
+            oos.writeObject(response);
+            oos.flush();
+            continue;
+          }
+        }
+
+        // クライアント側の「ん」チェック
+        char clientLastChar = wordResponse.getLastChar(wordFromClient);
+        if (clientLastChar == 'ん') {
+          Shiritori response = new Shiritori();
+          response.setWord(wordFromClient + "ですね。「ん」がついたのであなたの負けです！");
+          oos.writeObject(response);
+          oos.flush();
+          break;
+        }
+
+        String wordFromServer = wordResponse.getWord(wordFromClient);
+        // System.out.println(wordFromServer);
+
+        if (wordFromServer.contains("error")) {
+          Shiritori response = new Shiritori();
+          response.setWord("ひらがなの単語を入力してください。");
+          oos.writeObject(response);
+          oos.flush();
+          continue;
+        }
+
+        // サーバー側の「ん」チェック
+        char serverLastChar = wordResponse.getLastChar(wordFromServer);
+        if (serverLastChar == 'ん') {
+          Shiritori response = new Shiritori();
+          response.setWord(wordFromClient + "ですね。次は「" + wordFromServer + "」です。「ん」がついてしまったのでサーバーの負けです...");
+          oos.writeObject(response);
+          oos.flush();
+          break;
+        }
 
         Shiritori response = new Shiritori();
         response.setWord(wordFromClient + " ですね。では次の言葉は、 " + wordFromServer + "です。");
         // response.setWord(serverProcess(wordFromClient));
+        lastCharFromServer = serverLastChar;
 
         oos.writeObject(response);
         oos.flush();
