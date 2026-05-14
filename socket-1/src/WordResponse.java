@@ -1,3 +1,4 @@
+import java.text.Normalizer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,6 @@ public class WordResponse {
     words.put('X', "X-ray");
     words.put('Y', "Yankee");
     words.put('Z', "Zulu");
-
 
     words.put('あ', "あさひ");
     words.put('い', "いろは");
@@ -90,8 +90,18 @@ public class WordResponse {
     words.put('を', "おわり");
   }
 
-  public String getWord(char c) {
-    char searchChar = Character.toUpperCase(c);
+  public String getWord(String str) {
+    if (str == null || str.isEmpty()) {
+      return "文字が入力されていません";
+    }
+
+    String normalized = Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+
+    char c = normalized.charAt(normalized.length() - 1);
+    if (c == 'ん') {
+      return "「ん」がついたのであなたの負けです。";
+    }
+    char searchChar = Character.toUpperCase(c); // 大文字にしておく
 
     // getOrDefaultメソッドを使うと、Mapに登録されていない文字が入力されたときの返答を設定できる
     return words.getOrDefault(searchChar, "該当なし");

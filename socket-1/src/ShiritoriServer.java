@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ShiritoriServer {
 
-  private static final int times = 5;
+  private static final int times = 2;
 
   private static String serverProcess(String content) {
     StringBuilder sb = new StringBuilder();
@@ -35,23 +35,31 @@ public class ShiritoriServer {
       System.out.println("接続しました。相手の入力を待っています......");
 
       ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-
-      Shiritori word = (Shiritori) ois.readObject();// Integerクラスでキャスト。
-
-      String wordFromClient = word.getWord();
-      System.out.println("メッセージは" + wordFromClient);
-      //String wordFromClient = word.getContent();
-      //System.out.println("プレゼントの内容は" + wordFromClient);
-      String wordFromServer = "";
-
       ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-      Shiritori response = new Shiritori();
-      response.setWord("サーバーです。 " + wordFromClient + " ですね。では次の言葉は、 " + wordFromServer + "です。");
-      response.setWord(serverProcess(wordFromClient));
+      while (true) {
+        WordResponse WordResponse = new WordResponse();
+        Shiritori word = (Shiritori) ois.readObject();// Integerクラスでキャスト。
 
-      oos.writeObject(response);
-      oos.flush();
+        String wordFromClient = word.getWord();
+        if (wordFromClient.equals("q")) {
+          System.out.println("しりとり終了。");
+          break;
+        }
+        System.out.println("メッセージは" + wordFromClient);
+        // String wordFromClient = word.getContent();
+        // System.out.println("プレゼントの内容は" + wordFromClient);
+
+        String wordFromServer = WordResponse.getWord(wordFromClient);
+        System.out.println(wordFromServer);
+
+        Shiritori response = new Shiritori();
+        response.setWord(wordFromClient + " ですね。では次の言葉は、 " + wordFromServer + "です。");
+        // response.setWord(serverProcess(wordFromClient));
+
+        oos.writeObject(response);
+        oos.flush();
+      }
 
       // close処理
       ois.close();

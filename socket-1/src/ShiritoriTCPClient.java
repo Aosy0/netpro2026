@@ -17,28 +17,32 @@ public class ShiritoriTCPClient {
 
       System.out.println("しりとりをします。");
       ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-
-      System.out.println("ひらがなかアルファベットで単語を入力してください。");
-      String message = scanner.next();
-      //System.out.println("プレゼントの内容を入力してください(例:お菓子) ↓");
-      //String content = scanner.next();
-      scanner.close();
-
-      Shiritori word = new Shiritori();
-      word.setMessage(message);
-      //word.setContent(content);
-
-      oos.writeObject(word);
-      oos.flush();
-
       ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
-      Shiritori okaeshiWord = (Shiritori) ois.readObject();
+      System.out.println("ひらがなかアルファベットで単語を入力してください。");
+      while (true) {
+        String message = scanner.next();
+        // System.out.println("プレゼントの内容を入力してください(例:お菓子) ↓");
+        // String content = scanner.next();
+        if (message.equals("q")) {
+          System.out.println("しりとり終了");
+          break;
+        }
 
-      String replayMsg = okaeshiWord.getMessage();
-      System.out.println("サーバからのメッセージは" + replayMsg);
-      //String replayContent = okaeshiWord.getContent();
-      //System.out.println(replayContent + "をもらいました！");
+        Shiritori word = new Shiritori();
+        word.setWord(message);
+        // word.setContent(content);
+
+        oos.writeObject(word);
+        oos.flush();
+        Shiritori okaeshiWord = (Shiritori) ois.readObject();
+        String replayMsg = okaeshiWord.getWord();
+        System.out.println(replayMsg);
+      }
+      scanner.close();
+
+      // String replayContent = okaeshiWord.getContent();
+      // System.out.println(replayContent + "をもらいました！");
 
       ois.close();
       oos.close();
