@@ -21,6 +21,7 @@ public class ShiritoriTCPClient {
 
       System.out.println("ひらがなかアルファベットで単語を入力してください。");
       System.out.println("濁点・半濁点は無視してOK");
+      System.out.println("q で終了");
       while (true) {
         String message = scanner.next();
         // System.out.println("プレゼントの内容を入力してください(例:お菓子) ↓");
