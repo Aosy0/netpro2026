@@ -1,18 +1,18 @@
-## Getting Started
+# ネットワークプログラミング1　課題4-2
+## 動作内容
+サーバーとしりとりができるプログラム
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
 
-## Folder Structure
+クライアントとサーバーで接続を行った後、サーバーから単語の入力が求められる。入力はひらがなのみを受け付ける。
 
-The workspace contains two folders by default, where:
+漢字やカタカナ、アルファベットなどを使用した場合は、もう一度ひらがなで入力し直すように促す。
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+サーバーやクライアントが「ん」で終わる単語を出した場合、プログラムを終了する。しりとりの途中で「q」を入力しても終了する。
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## 動作結果
+動作結果は以下のとおりである。
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+### Server側
+```
 
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+```
