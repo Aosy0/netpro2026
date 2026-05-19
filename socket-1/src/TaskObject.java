@@ -3,6 +3,8 @@ import java.io.Serializable;
 public class TaskObject implements Serializable, ITask {
   public String message;
   public String content;
+  public int execNumber;
+  public int result;
 
   public String getMessage() {
     return message;
@@ -20,4 +22,15 @@ public class TaskObject implements Serializable, ITask {
     this.content = present;
   }
 
+  public void setExecNumber(int x) {
+    this.execNumber = x;
+  }
+
+  public void exec() {
+    isPrime(execNumber);
+  }
+
+  public int getResult() {
+    return result;
+  }
 }

@@ -81,4 +81,31 @@ public class TaskServerOnce {
       throw new RuntimeException(e);
     }
   }
+
+  public isPrime(int n) {
+    // 素数判定のアルゴリズム
+    if (execNumber <= 1) {
+      result = 0;
+      return;
+    }
+    if (execNumber <= 3) {
+      result = 1;
+      return;
+    }
+
+    // 2と3の倍数以外の奇数を確認
+    if (execNumber % 2 == 0 || execNumber % 3 == 0) {
+      result = 0;
+      return;
+    }
+
+    // 6k ± 1の形の数のみを確認
+    for (int i = 5; i * i <= execNumber; i += 6) {
+      if (execNumber % i == 0 || execNumber % (i + 2) == 0) {
+        result = 0;
+        return;
+      }
+    }
+    result = 1;
+  }
 }
