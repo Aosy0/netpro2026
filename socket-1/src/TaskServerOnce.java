@@ -3,35 +3,9 @@ import java.io.ObjectOutputStream;
 import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class TaskServerOnce {
-  public static boolean isPrime(int n) {
-    if (n <= 1) {
-      return false;
-    }
-    if (n <= 3) {
-      return true;
-    }
-
-    // 2と3の倍数以外の奇数を確認
-    if (n % 2 == 0 || n % 3 == 0) {
-      return false;
-    }
-
-    // 6k ± 1の形の数のみを確認
-    for (int i = 5; i * i <= n; i += 6) {
-      if (n % i == 0 || n % (i + 2) == 0) {
-        return false;
-      }
-    }
-
-    return true;
-  }
-
   public static void main(String arg[]) {
     try {
       /* 通信の準備をする */
@@ -48,20 +22,16 @@ public class TaskServerOnce {
 
       ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
-      XmasPresent present = (XmasPresent) ois.readObject();// Integerクラスでキャスト。
+      TaskObject task = (TaskObject) ois.readObject();// Integerクラスでキャスト。
 
-      String msgPresent = present.getMessage();
-      System.out.println("メッセージは" + msgPresent);
-      String presentFromClient = present.getContent();
-      System.out.println("プレゼントの内容は" + presentFromClient);
+      int execNumber = task.execNumber;
+      System.out.println("クライアントからの数字は" + execNumber);
+      task.exec(); // 最大の素数を計算
+      System.out.println("計算完了: " + task.getResult());
 
       ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-      XmasPresent response = new XmasPresent();
-      response.setMessage("サーバーです。メリークリスマス！\n" + presentFromClient + "ありがとう。\nプレゼントのお返しは" + times + "倍" + "です");
-      response.setContent(serverProcess(presentFromClient));
-
-      oos.writeObject(response);
+      oos.writeObject(task);
       oos.flush();
 
       // close処理
@@ -82,30 +52,4 @@ public class TaskServerOnce {
     }
   }
 
-  public isPrime(int n) {
-    // 素数判定のアルゴリズム
-    if (execNumber <= 1) {
-      result = 0;
-      return;
-    }
-    if (execNumber <= 3) {
-      result = 1;
-      return;
-    }
-
-    // 2と3の倍数以外の奇数を確認
-    if (execNumber % 2 == 0 || execNumber % 3 == 0) {
-      result = 0;
-      return;
-    }
-
-    // 6k ± 1の形の数のみを確認
-    for (int i = 5; i * i <= execNumber; i += 6) {
-      if (execNumber % i == 0 || execNumber % (i + 2) == 0) {
-        result = 0;
-        return;
-      }
-    }
-    result = 1;
-  }
 }

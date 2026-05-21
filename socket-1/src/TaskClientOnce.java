@@ -14,30 +14,26 @@ public class TaskClientOnce {
       Socket socket = new Socket("localhost", port);
       System.out.println("接続されました");
 
-      System.out.println("プレゼントを送ります");
+      System.out.println("入力された数字以下で最大の素数を計算します。");
       ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-      System.out.println("メッセージを入力してください(例:メリークリスマス) ↓");
-      String message = scanner.next();
-      System.out.println("プレゼントの内容を入力してください(例:お菓子) ↓");
-      String content = scanner.next();
+      System.out.println("2以上の数字を入力してください ↓");
+      String input = scanner.next();
+
       scanner.close();
 
-      XmasPresent present = new XmasPresent();
-      present.setMessage(message);
-      present.setContent(content);
+      TaskObject number = new TaskObject();
+      number.setExecNumber(Integer.parseInt(input));
 
-      oos.writeObject(present);
+      oos.writeObject(number);
       oos.flush();
 
       ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
 
-      XmasPresent okaeshiPresent = (XmasPresent) ois.readObject();
+      TaskObject resultTask = (TaskObject) ois.readObject();
 
-      String replayMsg = okaeshiPresent.getMessage();
-      System.out.println("サーバからのメッセージは" + replayMsg);
-      String replayContent = okaeshiPresent.getContent();
-      System.out.println(replayContent + "をもらいました！");
+      int resultPrime = resultTask.getResult();
+      System.out.println(input + "以下で最大の素数は" + resultPrime + "です。");
 
       ois.close();
       oos.close();

@@ -6,22 +6,6 @@ public class TaskObject implements Serializable, ITask {
   public int execNumber;
   public int result;
 
-  public String getMessage() {
-    return message;
-  }
-
-  public void setMessage(String message) {
-    this.message = message;
-  }
-
-  public String getContent() {
-    return content;
-  }
-
-  public void setContent(String present) {
-    this.content = present;
-  }
-
   public void setExecNumber(int x) {
     this.execNumber = x;
   }
