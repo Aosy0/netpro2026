@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class TaskServerOnce {
+public class TaskServerWhile {
   public static void main(String arg[]) {
     try {
       /* 通信の準備をする */
@@ -21,18 +21,24 @@ public class TaskServerOnce {
       System.out.println("接続しました。相手の入力を待っています......");
 
       ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
-
-      TaskObject task = (TaskObject) ois.readObject();// Integerクラスでキャスト。
-
-      long execNumber = task.execNumber;
-      System.out.println("クライアントからの数字は" + execNumber);
-      task.exec(); // 最大の素数を計算
-      System.out.println("計算完了: " + task.getResult());
-
       ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
 
-      oos.writeObject(task);
-      oos.flush();
+      while (true) {
+        TaskObject task = (TaskObject) ois.readObject();// Integerクラスでキャスト。
+
+        long execNumber = task.execNumber;
+        if (execNumber == 0) {
+          System.out.println("クライアントから終了要求があったのでサーバーを終了します");
+          break;
+        }
+        System.out.println("クライアントからの数字は" + execNumber);
+        task.exec(); // 最大の素数を計算
+        System.out.println("計算完了: " + task.getResult());
+
+
+        oos.writeObject(task);
+        oos.flush();
+      }
 
       // close処理
       ois.close();
@@ -53,3 +59,4 @@ public class TaskServerOnce {
   }
 
 }
+

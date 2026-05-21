@@ -3,16 +3,15 @@ import java.io.Serializable;
 public class TaskObject implements Serializable, ITask {
   public String message;
   public String content;
-  public int execNumber;
-  public int result;
+  public long execNumber;
+  public long result; // デカい数字を扱えるようにlongにする
 
-  public void setExecNumber(int x) {
+  public void setExecNumber(long x) {
     this.execNumber = x;
   }
 
   public void exec() {
-    // int temp = execNumber;
-    for (int i = execNumber; i >= 2; i--) {
+    for (long i = execNumber; i >= 2; i--) {
       if (isPrime(i)) {
         result = i;
         return;
@@ -21,11 +20,11 @@ public class TaskObject implements Serializable, ITask {
     result = 0;
   }
 
-  public int getResult() {
+  public long getResult() {
     return result;
   }
 
-  public static boolean isPrime(int n) {
+  public static boolean isPrime(long n) {
     if (n <= 1) {
       return false;
     }
@@ -39,7 +38,7 @@ public class TaskObject implements Serializable, ITask {
     }
 
     // 6k ± 1の形の数のみを確認
-    for (int i = 5; i * i <= n; i += 6) {
+    for (long i = 5; i * i <= n; i += 6) {
       if (n % i == 0 || n % (i + 2) == 0) {
         return false;
       }
