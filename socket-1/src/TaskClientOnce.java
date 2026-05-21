@@ -23,7 +23,7 @@ public class TaskClientOnce {
       scanner.close();
 
       TaskObject number = new TaskObject();
-      number.setExecNumber(Integer.parseInt(input));
+      number.setExecNumber(Long.parseLong(input));
 
       oos.writeObject(number);
       oos.flush();
@@ -32,7 +32,7 @@ public class TaskClientOnce {
 
       TaskObject resultTask = (TaskObject) ois.readObject();
 
-      int resultPrime = resultTask.getResult();
+      long resultPrime = resultTask.getResult();
       System.out.println(input + "以下で最大の素数は" + resultPrime + "です。");
 
       ois.close();
