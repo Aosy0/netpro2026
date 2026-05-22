@@ -10,10 +10,10 @@ public class UDPBroadCastClient {
      * ホストが所属しているネットワークが192.168.0.xxx/255.255.255.0なら「192.168.0.255」と指定する。
      * 
      */
-    InetSocketAddress remoteAddress = new InetSocketAddress("133.20.65.255", 5100);
+    InetSocketAddress remoteAddress = new InetSocketAddress("192.168.71.255", 5100);
     // new InetSocketAddress("133.20.69.255", 5100);
 
-    String str = "HELLO from Client@IWAI";
+    String str = "HELLO from Client@AOSHIMA";
     // UDPパケットに含めるデータ
     byte[] sendBuffer = str.getBytes();
 
