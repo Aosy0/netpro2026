@@ -3,6 +3,7 @@ package networking.udp;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class UDPClientWhile {
@@ -19,7 +20,7 @@ public class UDPClientWhile {
         // クライアントからのメッセージをユーザに入力させる
         System.out.print("送信メッセージを入力してください: ");
         String clientMessage = scanner.nextLine();
-        sendData = clientMessage.getBytes();
+        sendData = clientMessage.getBytes(StandardCharsets.UTF_8);
 
         // メッセージをサーバに送信
         DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, serverAddress, 9876);
