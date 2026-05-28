@@ -4,10 +4,10 @@ package thread;
 public class CountAZTenRunnable implements Runnable {
   // main メソッドはプログラムのエントリーポイントです。
   public static void main(String[] args) {
-    Thread[] threads = new Thread[26];
-    // 2つの文字を初期化します。
+    int numThreads = 26; // 作成するスレッドの数
+    Thread[] threads = new Thread[numThreads];
     char c = 97; // ASCII値 97 は 'a' です
-    for (int i = 0; i < 26; i++) {
+    for (int i = 0; i < numThreads; i++) {
       // 初期化した文字をコンソールに出力します。
       // System.out.println(c); // 出力: a
       CountAZTenRunnable ct = new CountAZTenRunnable();
