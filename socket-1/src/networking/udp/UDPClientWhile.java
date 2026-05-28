@@ -11,7 +11,10 @@ public class UDPClientWhile {
     DatagramSocket socket = null;
     try {
       socket = new DatagramSocket();
-      InetAddress serverAddress = InetAddress.getByName("192.168.68.53");
+      // InetAddress serverAddress = InetAddress.getByName("192.168.68.53");
+      socket.setBroadcast(true); // ソケットでのブロードキャスト送信を許可する
+      InetAddress serverAddress = InetAddress.getByName("255.255.255.255");
+
       byte[] sendData;
       byte[] receiveData = new byte[1024];
       Scanner scanner = new Scanner(System.in);
