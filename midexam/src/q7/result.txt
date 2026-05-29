@@ -1,0 +1,13 @@
+* isTripleLength
+true
+false
+
+* isTripleRepeat
+true
+true
+false
+false
+
+* isSemiTripleRepeat
+true
+false
