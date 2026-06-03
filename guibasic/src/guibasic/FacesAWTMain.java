@@ -2,6 +2,7 @@ package guibasic;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 public class FacesAWTMain {
 
@@ -50,21 +51,19 @@ public class FacesAWTMain {
 
     // 描画処理
     public void paint(Graphics g) {
-      // w = 200;
-      // h = 200;
-      // xStart = 50;
-      // yStart = 50;
-
-      // fobj1.drawFace(g);
-      // fobj2.setPosition(xStart + w + 50, yStart); // 2つ目の顔を右に配置
-      // fobj2.drawFace(g);
       for (int j = 0; j < 3; j++) {
         for (int i = 0; i < 3; i++) {
-          fobjs[i + 3 * j].setPosition(200 * i + 50, 200 * j + 50);
-          // fobjs[i + 3 * j].setEmotionLevel(i, j);
+
+          int index = i + 3 * j;
+          fobjs[index].setPosition(200 * i + 50, 200 * j + 50);
+          // fobjs[index].setEmotionLevel(i, j);
           Color faceColor = new Color(i * 100, j * 100, 200);
+          int arc = index * 25;
+
           g.setColor(faceColor);
-          fobjs[i + 3 * j].drawFace(g);
+
+          int ey = new Random().nextInt(11) - 5;
+          fobjs[index].drawFace(g, arc, index, ey);
         }
       }
     }
@@ -83,25 +82,25 @@ public class FacesAWTMain {
       this.yStart = yStart;
     }
 
-    public void drawFace(Graphics g) {
+    public void drawFace(Graphics g, int arc, int ex, int ey) {
       // 顔の各パーツを描画
       // Color color = new Color(255, 123, 24, 56);
       // g.setColor(color);
-      drawRim(g); // 顔の輪郭
+      drawRim(g, arc); // 顔の輪郭
       // drawBrow(g, 30, 30); // まゆげ
       drawEye(g, 35); // 目
       drawNose(g, 40); // 鼻
       // drawMouth(g, 100); // 口
-      setEmotionLevel(g, 1, 1); // 表情レベル（中立）を設定
+      setEmotionLevel(g, ex, ey); // 表情レベルを設定
     }
 
     // 顔の枠線を描く
-    public void drawRim(Graphics g) {
+    public void drawRim(Graphics g, int arc) {
       // g.drawLine(xStart, yStart, xStart + w, yStart);
       // g.drawLine(xStart, yStart, xStart, yStart + h);
       // g.drawLine(xStart, yStart + h, xStart + w, yStart + h);
       // g.drawLine(xStart + w, yStart, xStart + w, yStart + h);
-      g.drawRoundRect(xStart + 5, yStart + 5, w - 10, h - 10, 40, 40);
+      g.drawRoundRect(xStart + 5, yStart + 5, w - 10, h - 10, arc, arc);
     }
 
     // まゆげを描く（未実装）
@@ -124,11 +123,11 @@ public class FacesAWTMain {
     }
 
     // 口を描く
-    public void drawMouth(Graphics g, int mx) {
+    public void drawMouth(Graphics g, int mx, int my) {
       int xMiddle = xStart + w / 2;
-      int yMouth = yStart + h - 30;
-      g.drawLine(xMiddle - mx / 2, yMouth + 10, xMiddle, yMouth);
-      g.drawLine(xMiddle + mx / 2, yMouth + 10, xMiddle, yMouth);
+      int yMouth = (yStart + h - 30);
+      g.drawLine(xMiddle - mx / 2, yMouth + my, xMiddle, yMouth);
+      g.drawLine(xMiddle + mx / 2, yMouth + my, xMiddle, yMouth);
     }
 
     public void setEmotionLevel(Graphics g, int ex, int ey) {
@@ -136,8 +135,9 @@ public class FacesAWTMain {
       // まゆげの傾きと口の形を変える
       int browOffset = (ex - 1) * 10; // -10, 0, +10
       int mouthOffset = (ey - 1) * 20; // -20, 0, +20
+      int my = new Random().nextInt(21) - 10; // -5から+5のランダムな値
       drawBrow(g, 30, browOffset);
-      drawMouth(g, 100 + mouthOffset);
+      drawMouth(g, 100 + mouthOffset, my);
     }
 
   }
