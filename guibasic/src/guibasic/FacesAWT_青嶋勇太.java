@@ -4,17 +4,17 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 
-public class FacesAWTMain {
+public class FacesAWT_青嶋勇太 {
 
   // private FaceFrame[] f = new FaceFrame[9]; // 顔フレームの配列
   // メインメソッド：プログラムの開始点
 
   public static void main(String[] args) {
-    new FacesAWTMain(); // インスタンスを生成
+    new FacesAWT_青嶋勇太(); // インスタンスを生成
   }
 
   // コンストラクタ：ウィンドウを作成して表示
-  FacesAWTMain() {
+  FacesAWT_青嶋勇太() {
     FaceFrame f = new FaceFrame(); // カスタムフレーム生成
     f.setSize(800, 800); // ウィンドウサイズ設定
     f.addWindowListener(new WindowAdapter() {
@@ -120,6 +120,8 @@ public class FacesAWTMain {
     public void drawEye(Graphics g, int r) {
       g.fillOval(xStart + 40, yStart + 70, r, r);
       g.fillOval(xStart + 120, yStart + 70, r, r);
+      // g.drawOval(xStart + 40, yStart + 70, r + 10, r + 10);
+      // g.drawOval(xStart + 120, yStart + 70, r, r);
     }
 
     // 口を描く
